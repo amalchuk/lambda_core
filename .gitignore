@@ -1,0 +1,11 @@
+# Byte-compiled files:
+*.dll
+*.exe
+*.ico
+
+# Environment / workspace settings:
+.venv/
+.vscode/
+
+# Distribution / packaging:
+bin/

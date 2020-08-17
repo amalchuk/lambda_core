@@ -1,0 +1,91 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build favicon.ico",
+      "type": "process",
+      "options": {
+        "env": {
+          "INCLUDE": "${workspaceFolder}\\.venv\\include"
+        },
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe"
+        }
+      },
+      "command": "${workspaceFolder}\\.venv\\fasm.exe",
+      "args": [
+        "-m",
+        "65536",
+        "${workspaceFolder}\\src\\favicon\\favicon.asm",
+        "${workspaceFolder}\\src\\favicon.ico"
+      ],
+      "group": "build",
+      "presentation": {
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build lambda.dll",
+      "options": {
+        "env": {
+          "INCLUDE": "${workspaceFolder}\\.venv\\include"
+        },
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe"
+        }
+      },
+      "command": "${workspaceFolder}\\.venv\\fasm.exe",
+      "args": [
+        "-m",
+        "65536",
+        "${workspaceFolder}\\src\\lambda_dll.asm",
+        "${workspaceFolder}\\bin\\lambda.dll"
+      ],
+      "group": "build",
+      "presentation": {
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build lambda.exe",
+      "options": {
+        "env": {
+          "INCLUDE": "${workspaceFolder}\\.venv\\include"
+        },
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe"
+        }
+      },
+      "command": "${workspaceFolder}\\.venv\\fasm.exe",
+      "args": [
+        "-m",
+        "65536",
+        "${workspaceFolder}\\src\\lambda_exe.asm",
+        "${workspaceFolder}\\bin\\lambda.exe"
+      ],
+      "dependsOn": [
+        "build favicon.ico"
+      ],
+      "group": "build",
+      "presentation": {
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build",
+      "dependsOn": [
+        "build lambda.dll",
+        "build lambda.exe"
+      ],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
