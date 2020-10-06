@@ -6,13 +6,13 @@
       "type": "process",
       "options": {
         "env": {
-          "INCLUDE": "${workspaceFolder}\\.venv\\include"
+          "INCLUDE": "${workspaceFolder}\\.venv\\INCLUDE"
         },
         "shell": {
           "executable": "C:\\Windows\\System32\\cmd.exe"
         }
       },
-      "command": "${workspaceFolder}\\.venv\\fasm.exe",
+      "command": "${workspaceFolder}\\.venv\\FASM.EXE",
       "args": [
         "-m",
         "65536",
@@ -29,13 +29,13 @@
       "label": "build lambda.dll",
       "options": {
         "env": {
-          "INCLUDE": "${workspaceFolder}\\.venv\\include"
+          "INCLUDE": "${workspaceFolder}\\.venv\\INCLUDE"
         },
         "shell": {
           "executable": "C:\\Windows\\System32\\cmd.exe"
         }
       },
-      "command": "${workspaceFolder}\\.venv\\fasm.exe",
+      "command": "${workspaceFolder}\\.venv\\FASM.EXE",
       "args": [
         "-m",
         "65536",
@@ -52,13 +52,13 @@
       "label": "build lambda.exe",
       "options": {
         "env": {
-          "INCLUDE": "${workspaceFolder}\\.venv\\include"
+          "INCLUDE": "${workspaceFolder}\\.venv\\INCLUDE"
         },
         "shell": {
           "executable": "C:\\Windows\\System32\\cmd.exe"
         }
       },
-      "command": "${workspaceFolder}\\.venv\\fasm.exe",
+      "command": "${workspaceFolder}\\.venv\\FASM.EXE",
       "args": [
         "-m",
         "65536",
