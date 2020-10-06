@@ -2,8 +2,8 @@ os: windows
 language: shell
 
 install:
-  - PowerShell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
+  - powershell -Command Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 script:
-  - PowerShell -File download.ps1
-  - PowerShell -File build.ps1
+  - powershell -File download.ps1
+  - powershell -File build.ps1
