@@ -6,8 +6,6 @@ $fasm_destination_path = Join-Path -Path $PSScriptRoot -ChildPath "fasm.zip"
 Invoke-WebRequest -Uri $fasm_download_url -OutFile $fasm_destination_path
 
 $virtual_environment_path = Join-Path -Path $PSScriptRoot -ChildPath ".venv"
-$virtual_environment_path | Remove-Item -Recurse -Force
-
 $fasm_destination_path | Expand-Archive -DestinationPath $virtual_environment_path -Force
 $fasm_destination_path | Remove-Item -Force
 
