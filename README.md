@@ -28,6 +28,6 @@ Links
 - GitHub mirror: <https://github.com/amalchuk/lambda_core>
 
 [homepage]: <https://gitlab.com/amalchuk/lambda_core>
-[pipeline]: <https://travis-ci.com/amalchuk/Lambda Core.svg>
-[pipeline_homepage]: <https://travis-ci.com/amalchuk/Lambda Core>
+[pipeline]: <https://travis-ci.com/amalchuk/lambda_core.svg>
+[pipeline_homepage]: <https://travis-ci.com/gitlab/amalchuk/lambda_core>
 [showcase]: <showcase.png>

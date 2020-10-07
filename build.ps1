@@ -6,7 +6,7 @@ $VirtualEnvironmentPath = Get-Location | Join-Path -ChildPath ".venv"
 $VirtualEnvironmentExists = Test-Path -Path $VirtualEnvironmentPath
 
 if ($VirtualEnvironmentExists -eq $False) {
-  Write-Host "Download the flat assembler" -ForegroundColor DarkBlue
+  Write-Host "Download the flat assembler 1.73.25 for Windows" -ForegroundColor DarkBlue
 
   $FASMDownloadUrl = "https://flatassembler.net/fasmw17325.zip"
   $FASMDestinationPath = Get-Location | Join-Path -ChildPath "flat_assembler.zip"
