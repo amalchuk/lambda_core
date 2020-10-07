@@ -5,5 +5,4 @@ install:
   - powershell -Command Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 script:
-  - powershell -File download.ps1
   - powershell -File build.ps1

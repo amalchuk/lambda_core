@@ -1,24 +1,47 @@
-$virtual_environment_path = Get-Location | Join-Path -ChildPath ".venv"
+$Global:ProgressPreference = "SilentlyContinue"
+$VirtualEnvironmentPath = Get-Location | Join-Path -ChildPath ".venv"
+$VirtualEnvironmentExists = Test-Path -Path $VirtualEnvironmentPath
 
-$fasm_memory_limit = 65536 # 64 megabytes memory
+if ($VirtualEnvironmentExists -eq $False) {
+  Write-Host "[*] Download the flat assembler 1.73.25 for Windows"
 
-$fasm_compiler_path = Join-Path -Path $virtual_environment_path -ChildPath "FASM.EXE"
-New-Alias -Name FASM -Value $fasm_compiler_path
-$Env:INCLUDE = Join-Path -Path $virtual_environment_path -ChildPath "INCLUDE"
+  $FASMDownloadUrl = "https://flatassembler.net/fasmw17325.zip"
+  $FASMDestinationPath = Get-Location | Join-Path -ChildPath "flat_assembler.zip"
+  Invoke-WebRequest -Uri $FASMDownloadUrl -OutFile $FASMDestinationPath
 
-$src_favicon_path = Get-Location | Join-Path -ChildPath "src" | Join-Path -ChildPath "favicon" | Join-Path -ChildPath "favicon.asm"
-$bin_favicon_path = Get-Location | Join-Path -ChildPath "src" | Join-Path -ChildPath "favicon.ico"
-Write-Host "[*] Build $src_favicon_path to $bin_favicon_path"
-FASM -m $fasm_memory_limit $src_favicon_path $bin_favicon_path
+  $FASMDestinationPath | Expand-Archive -DestinationPath $VirtualEnvironmentPath -Force
+  $FASMDestinationPath | Remove-Item -Force
 
-New-Item -Path "bin" -ItemType Directory -Force | Out-Null
+  $VirtualEnvironmentProperties = Get-ItemProperty -Path $VirtualEnvironmentPath
+  $VirtualEnvironmentProperties.Attributes += "Hidden"
+}
 
-$src_lambda_dll_path = Get-Location | Join-Path -ChildPath "src" | Join-Path -ChildPath "lambda_dll.asm"
-$bin_lambda_dll_path = Get-Location | Join-Path -ChildPath "bin" | Join-Path -ChildPath "lambda.dll"
-Write-Host "[*] Build $src_lambda_dll_path to $bin_lambda_dll_path"
-FASM -m $fasm_memory_limit $src_lambda_dll_path $bin_lambda_dll_path
+$FASMCompilerPath = Join-Path -Path $VirtualEnvironmentPath -ChildPath "FASM.EXE"
+New-Alias -Name FASM -Value $FASMCompilerPath
+$Env:INCLUDE = Join-Path -Path $VirtualEnvironmentPath -ChildPath "INCLUDE"
 
-$src_lambda_exe_path = Get-Location | Join-Path -ChildPath "src" | Join-Path -ChildPath "lambda_exe.asm"
-$bin_lambda_exe_path = Get-Location | Join-Path -ChildPath "bin" | Join-Path -ChildPath "lambda.exe"
-Write-Host "[*] Build $src_lambda_exe_path to $bin_lambda_exe_path"
-FASM -m $fasm_memory_limit $src_lambda_exe_path $bin_lambda_exe_path
+$SourceCodePath = Get-Location | Join-Path -ChildPath "src"
+$BinaryCodePath = Get-Location | Join-Path -ChildPath "bin"
+$BinaryPathExists = Test-Path -Path $BinaryCodePath
+
+if ($BinaryPathExists -eq $False) {
+  New-Item -Path $BinaryCodePath -ItemType Directory -Force | Out-Null
+}
+
+$SourceFaviconPath = Join-Path -Path $SourceCodePath -ChildPath "favicon" | Join-Path -ChildPath "favicon.asm"
+$BinaryFaviconPath = Join-Path -Path $SourceCodePath -ChildPath "favicon.ico"
+Write-Host "[*] Build $SourceFaviconPath to $BinaryFaviconPath"
+FASM $SourceFaviconPath $BinaryFaviconPath
+
+$SourceLambdaDLLPath = Join-Path -Path $SourceCodePath -ChildPath "lambda_dll.asm"
+$BinaryLambdaDLLPath = Join-Path -Path $BinaryCodePath -ChildPath "lambda.dll"
+Write-Host "[*] Build $SourceLambdaDLLPath to $BinaryLambdaDLLPath"
+FASM $SourceLambdaDLLPath $BinaryLambdaDLLPath
+
+$SourceLambdaEXEPath = Join-Path -Path $SourceCodePath -ChildPath "lambda_exe.asm"
+$BinaryLambdaEXEPath = Join-Path -Path $BinaryCodePath -ChildPath "lambda.exe"
+Write-Host "[*] Build $SourceLambdaEXEPath to $BinaryLambdaEXEPath"
+FASM $SourceLambdaEXEPath $BinaryLambdaEXEPath
+
+Write-Host "[*] Done"
+$Global:ProgressPreference = "Continue"

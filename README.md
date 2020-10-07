@@ -11,6 +11,13 @@ Features
 - XQZ Wallhack
 - Lambert
 
+Installation
+------------
+```
+$ powershell -Command Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+$ powershell -File build.ps1
+```
+
 Distribution
 ------------
 This project is licensed under the terms of the [MIT License](LICENSE).
