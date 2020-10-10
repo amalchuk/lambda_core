@@ -9,7 +9,7 @@ if ($VirtualEnvironmentExists -eq $False) {
   Write-Host "Download the flat assembler 1.73.25 for Windows" -ForegroundColor DarkBlue
 
   $FASMDownloadUrl = "https://flatassembler.net/fasmw17325.zip"
-  $FASMDestinationPath = Get-Location | Join-Path -ChildPath "flat_assembler.zip"
+  $FASMDestinationPath = Join-Path -Path $Env:TEMP -ChildPath "flat_assembler.zip"
   Invoke-WebRequest -Uri $FASMDownloadUrl -OutFile $FASMDestinationPath
 
   $FASMDestinationPath | Expand-Archive -DestinationPath $VirtualEnvironmentPath -Force
