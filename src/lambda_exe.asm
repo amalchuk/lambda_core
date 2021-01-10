@@ -1,4 +1,4 @@
-; Copyright 2020 Andrew Malchuk. All rights reserved.
+; Copyright 2020-2021 Andrew Malchuk. All rights reserved.
 ; This project is licensed under the terms of the MIT License.
 
 format PE GUI
@@ -188,12 +188,12 @@ data resource
   versioninfo version, VOS_NT_WINDOWS32, VFT_APP, VFT2_UNKNOWN, LANG_NEUTRAL, 0, \
     'Comments', 'Lambda Core', \
     'FileDescription', 'OpenGL32 hooking library for GoldSource-based engine games', \
-    'FileVersion', '1.1', \
+    'FileVersion', '1.0', \
     'InternalName', 'lambda', \
-    'LegalCopyright', 'Copyright 2020 Andrew Malchuk. All rights reserved.', \
+    'LegalCopyright', 'Copyright 2020-2021 Andrew Malchuk. All rights reserved.', \
     'OriginalFilename', 'lambda.exe', \
     'ProductName', 'Lambda Core', \
-    'ProductVersion', '1.1'
+    'ProductVersion', '1.0'
 end data
 
 ; +--------------------------------------------+
