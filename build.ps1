@@ -1,16 +1,23 @@
 # Copyright 2020-2021 Andrew Malchuk. All rights reserved.
 # This project is licensed under the terms of the MIT License.
 
+$FASMDownloadUrl = "https://flatassembler.net/fasmw17327.zip" # v1.73.27
+$ExpectedFileHash = "5C22BE570279AFADF55BDAD7F1350CAFAA854B52D0856CC564E3C28E582370AC"
+
 $Global:ProgressPreference = "SilentlyContinue"
 $VirtualEnvironmentPath = Get-Location | Join-Path -ChildPath ".venv"
 $VirtualEnvironmentExists = Test-Path -Path $VirtualEnvironmentPath
 
 if ($VirtualEnvironmentExists -eq $False) {
-  Write-Host "Download the flat assembler 1.73.25 for Windows" -ForegroundColor DarkBlue
+  Write-Host "Download the flat assembler for Windows" -ForegroundColor DarkBlue
 
-  $FASMDownloadUrl = "https://flatassembler.net/fasmw17325.zip"
   $FASMDestinationPath = Join-Path -Path $Env:TEMP -ChildPath "flat_assembler.zip"
   Invoke-WebRequest -Uri $FASMDownloadUrl -OutFile $FASMDestinationPath
+  $FileHash = (Get-FileHash -Path $FASMDestinationPath -Algorithm SHA256).Hash
+
+  if ($FileHash -ne $ExpectedFileHash) {
+    Write-Error -Message "File checksum validation error, expected $ExpectedFileHash, got $FileHash" -Category SecurityError -ErrorAction Stop
+  }
 
   $FASMDestinationPath | Expand-Archive -DestinationPath $VirtualEnvironmentPath -Force
   $FASMDestinationPath | Remove-Item -Force
