@@ -2,7 +2,7 @@
 # This project is licensed under the terms of the MIT License.
 
 $FASMDownloadUrl = "https://flatassembler.net/fasmw17327.zip" # v1.73.27
-$ExpectedFileHash = "5C22BE570279AFADF55BDAD7F1350CAFAA854B52D0856CC564E3C28E582370AC"
+$ExpectedFileHash = "37CC8D2D9D6ECE2AD15AE4457530145C545C792718B45007B2C79D1209C6F6B5"
 
 $Global:ProgressPreference = "SilentlyContinue"
 $VirtualEnvironmentPath = Get-Location | Join-Path -ChildPath ".venv"
